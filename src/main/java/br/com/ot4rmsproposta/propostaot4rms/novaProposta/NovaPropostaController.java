@@ -23,6 +23,11 @@ public class NovaPropostaController {
     @PostMapping
     public ResponseEntity<?> cadastra(@RequestBody @Valid NovaPropostaRequest request,
                                       UriComponentsBuilder uriBuilder) {
+
+        if (propostaRepository.existsByDocumento(request.getDocumento())) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
+
         Proposta novaProposta = request.paraProposta();
 
         propostaRepository.save(novaProposta);
