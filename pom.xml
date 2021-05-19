@@ -8,14 +8,17 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>br.com.ot4-rms-proposta</groupId>
 	<artifactId>proposta-ot4-rms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>proposta-ot4-rms</name>
 	<description>Validador de Proposta</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -47,6 +50,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
