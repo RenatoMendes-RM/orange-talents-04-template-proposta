@@ -37,11 +37,14 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+
+    private String numerocartao;
+
     /*
     * @Deprecated  apenas para uso do hibernete.
     * */
     @Deprecated
-    private Proposta() { }
+    private Proposta(@Email @NotBlank String email, @NotBlank String nome, @NotNull @Positive BigDecimal salario, @NotBlank String documento, Endereco novoEndereco, String numerocartao) { }
 
     public Proposta(String email,
                     String nome,
@@ -53,6 +56,10 @@ public class Proposta {
         this.salario = salario;
         this.documento = documento;
         this.endereco = endereco;
+    }
+
+    public Proposta() {
+
     }
 
     public Long getId() {
@@ -67,7 +74,19 @@ public class Proposta {
         return documento;
     }
 
+    public String getNumerocartao() {
+        return numerocartao;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setNumerocartao(String numerocartao) {
+        this.numerocartao = numerocartao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
