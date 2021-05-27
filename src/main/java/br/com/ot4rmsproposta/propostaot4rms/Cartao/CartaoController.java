@@ -1,19 +1,19 @@
-package br.com.ot4rmsproposta.propostaot4rms.novaProposta;
+package br.com.ot4rmsproposta.propostaot4rms.Cartao;
 
+import br.com.ot4rmsproposta.propostaot4rms.novaProposta.*;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 
 
 
 
 @RestController
-@RequestMapping("/api/propostas")
+@RequestMapping("/api/Cartoes")
 public class AssociaCartaoPropostaController {
 
     @Autowired
@@ -22,12 +22,12 @@ public class AssociaCartaoPropostaController {
     @Autowired
     private AssociaCartaoPropostaClient associaCartaoPropostaClient;
 
-    @PutMapping("/{id}")
+  /*  @PutMapping("/{id}")
     public ResponseEntity<?> associaNovoCartao(@PathVariable Long id) {
         // ,
         //                                               @RequestBody @Valid AssociaCartaoPropostaRequest request
 
-        AssociaCartaoPropostaRequest request = new AssociaCartaoPropostaRequest()
+        AssociaCartaoPropostaRequest request = new AssociaCartaoPropostaRequest();
 
 
         Proposta propostaParaAtualizarCartao = request.paraCartaoProposta();
@@ -41,7 +41,7 @@ public class AssociaCartaoPropostaController {
 
             associaCartaoPropostaClient = new AssociaCartaoPropostaClient() {
                 @Override
-                public AssociaCartaoPropostaResponse consulta(AssociaCartaoPropostaRequest request) {
+                public CartaoResponse consulta(AssociaCartaoPropostaRequest request) {
                     return null;
                 }
             };
@@ -49,7 +49,7 @@ public class AssociaCartaoPropostaController {
 
 
             AssociaCartaoPropostaRequest associaCartaoPropostaRequest = new AssociaCartaoPropostaRequest( id );
-            AssociaCartaoPropostaResponse resultadoDaConsulta = associaCartaoPropostaClient.consulta(associaCartaoPropostaRequest);
+            CartaoResponse resultadoDaConsulta = associaCartaoPropostaClient.consulta(associaCartaoPropostaRequest);
 
             propostaParaAtualizarCartao.setNumerocartao(resultadoDaConsulta.getId());
             propostaRepository.save(propostaParaAtualizarCartao);
@@ -63,6 +63,6 @@ public class AssociaCartaoPropostaController {
 
         return ResponseEntity.created(location).build();
     }
-
+*/
 
 }

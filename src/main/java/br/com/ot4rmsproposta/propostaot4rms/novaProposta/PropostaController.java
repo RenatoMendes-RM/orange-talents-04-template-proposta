@@ -65,52 +65,13 @@ public class NovaPropostaController {
     }
 
 
+    @GetMapping
 
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> associaNovoCartao(@PathVariable Long id) {
-        // ,
-        //                                               @RequestBody @Valid AssociaCartaoPropostaRequest request
-
-        AssociaCartaoPropostaRequest request = new AssociaCartaoPropostaRequest();
 
 
-        Proposta propostaParaAtualizarCartao = request.paraCartaoProposta();
-        propostaParaAtualizarCartao.setId(id);
-
-
-        // propostaRepository.findById(id);
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
-
-        try {
-
-            associaCartaoPropostaClient = new AssociaCartaoPropostaClient() {
-                @Override
-                public AssociaCartaoPropostaResponse consulta(AssociaCartaoPropostaRequest request) {
-                    return null;
-                }
-            };
-
-
-
-            AssociaCartaoPropostaRequest associaCartaoPropostaRequest = new AssociaCartaoPropostaRequest( id );
-            AssociaCartaoPropostaResponse resultadoDaConsulta = associaCartaoPropostaClient.consulta(associaCartaoPropostaRequest);
-
-            propostaParaAtualizarCartao.setNumerocartao(resultadoDaConsulta.getId());
-            propostaRepository.save(propostaParaAtualizarCartao);
-        } catch (FeignException.UnprocessableEntity unprocessableEntity){
-
-        }
-
-        URI location = uriBuilder.path("/api/cartoes/{id}")
-                .buildAndExpand(propostaParaAtualizarCartao.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
-    }
 }
-
 
 
 
