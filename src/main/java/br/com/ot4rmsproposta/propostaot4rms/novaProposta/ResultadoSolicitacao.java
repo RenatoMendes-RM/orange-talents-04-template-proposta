@@ -4,7 +4,7 @@ public enum ResultadoSolicitacao {
 
 
     COM_RESTRICAO(Status.NAO_ELEGIVEL),
-    SEM_RESTRICAO(Status.ELEVIGEL);
+    SEM_RESTRICAO(Status.ELEGIVEL);
 
     private final Status status;
 

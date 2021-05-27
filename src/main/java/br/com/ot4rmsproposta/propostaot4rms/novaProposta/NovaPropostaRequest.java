@@ -28,6 +28,8 @@ public class NovaPropostaRequest {
     @Valid
     private EnderecoRequest endereco;
 
+    private Andamento andamento;
+
     public NovaPropostaRequest(String email,
                                String nome,
                                BigDecimal salario,
@@ -38,6 +40,7 @@ public class NovaPropostaRequest {
         this.salario = salario;
         this.documento = documento;
         this.endereco = endereco;
+        this.andamento = Andamento.EM_ANALISE;
 
     }
 
@@ -61,6 +64,10 @@ public class NovaPropostaRequest {
         return endereco;
     }
 
+    public Andamento getAndamento() {
+        return andamento;
+    }
+
     @Override
     public String toString() {
         return "NovaPropostaRequest{" +
@@ -76,7 +83,7 @@ public class NovaPropostaRequest {
 
         Endereco novoEndereco = endereco.paraEndereco();
 
-        return new Proposta(email, nome, salario, documento, novoEndereco);
+        return new Proposta(email, nome, salario, documento, novoEndereco, andamento);
 
     }
 }

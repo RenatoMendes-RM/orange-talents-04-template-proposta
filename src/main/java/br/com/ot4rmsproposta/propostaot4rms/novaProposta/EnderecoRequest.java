@@ -10,7 +10,7 @@ public class EnderecoRequest {
     @NotBlank
     private String numero;
 
-    @NotBlank
+
     private String complemento;
 
     @NotBlank

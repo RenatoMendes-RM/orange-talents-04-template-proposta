@@ -4,22 +4,19 @@ public class AnaliseDePropostaRequest {
 
     private String documento;
     private String nome;
-    private Long idProposta;
+    private String idProposta;
 
     /* @Deprecated Somente para uso do framework*/
     @Deprecated
     public AnaliseDePropostaRequest() { }
 
-
     public AnaliseDePropostaRequest(String documento,
                                     String nome,
-                                    Long idProposta) {
+                                    String idProposta) {
         this.documento = documento;
         this.nome = nome;
         this.idProposta = idProposta;
     }
-
-
     public String getDocumento() {
         return documento;
     }
@@ -28,7 +25,7 @@ public class AnaliseDePropostaRequest {
         return nome;
     }
 
-    public Long getIdProposta() {
+    public String getIdProposta() {
         return idProposta;
     }
 }

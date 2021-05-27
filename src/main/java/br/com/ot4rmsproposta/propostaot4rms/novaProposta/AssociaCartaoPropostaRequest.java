@@ -17,8 +17,6 @@ public class AssociaCartaoPropostaRequest {
     }
 
     public Proposta paraCartaoProposta() {
-
         return new Proposta();
-
     }
 }

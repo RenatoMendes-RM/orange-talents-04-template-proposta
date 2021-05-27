@@ -12,7 +12,7 @@ public class Endereco {
     @NotBlank
     private String numero;
 
-    @NotBlank
+
     private String complemento;
 
     @NotBlank

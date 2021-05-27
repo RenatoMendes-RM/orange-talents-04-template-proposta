@@ -8,13 +8,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-
-
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/propostas")
-public class NovaPropostaController {
+public class PropostaController {
 
     @Autowired
     private PropostaRepository propostaRepository;
@@ -24,7 +22,6 @@ public class NovaPropostaController {
 
     @Autowired
     private AssociaCartaoPropostaClient associaCartaoPropostaClient;
-
 
     // Task 015.consultando_dados_solicitante
     // Alternativa para tornar nossa API " um client" 1: usar:
@@ -37,7 +34,6 @@ public class NovaPropostaController {
         if (propostaRepository.existsByDocumento(request.getDocumento())) {
             return ResponseEntity.unprocessableEntity().build();
         }
-
         Proposta novaProposta = request.paraProposta();
 
         propostaRepository.save(novaProposta);
@@ -46,13 +42,16 @@ public class NovaPropostaController {
             AnaliseDePropostaRequest analiseRequest = new AnaliseDePropostaRequest(
                     novaProposta.getDocumento(),
                     novaProposta.getNome(),
-                    novaProposta.getId());
-            AnaliseDePropostaResponse resultadoDaConsulta = analiseClient.consultaPropostaElegivel(analiseRequest);
+                    novaProposta.getId().toString());
+
+            PropostaResponse resultadoDaConsulta = analiseClient.consultaPropostaElegivel(analiseRequest);
             Status status = resultadoDaConsulta.status();
             novaProposta.setStatus(status);
         } catch (FeignException.UnprocessableEntity unprocessableEntity) {
             novaProposta.setStatus(Status.NAO_ELEGIVEL);
         }
+        Andamento andamento = (novaProposta.getStatus() == Status.NAO_ELEGIVEL) ?  Andamento.PROPOSTA_RECUSADA : Andamento.EM_ANALISE;
+        novaProposta.setAndamento(andamento);
 
         propostaRepository.save(novaProposta);
 
@@ -64,20 +63,13 @@ public class NovaPropostaController {
         return ResponseEntity.created(location).build();
     }
 
-
-    @GetMapping
-
-
-
-
-
+    //035 acompanhamento proposta
+    @GetMapping("/{id}")
+    public ResponseEntity<PropostaResponseFilter> buscarPeloIdProposta(@PathVariable Long id) {
+        Optional<Proposta> possivelProposta = propostaRepository.findById(id);
+        return possivelProposta
+                .map(proposta -> ResponseEntity.ok()
+                        .body(new PropostaResponseFilter(proposta)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
-
-
-
-/*
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-*/

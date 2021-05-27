@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface AnaliseSolicitacaoClient {
 
     @PostMapping("/api/solicitacao")
-    AnaliseDePropostaResponse consultaPropostaElegivel(AnaliseDePropostaRequest request);
+    PropostaResponse consultaPropostaElegivel(AnaliseDePropostaRequest request);
 }

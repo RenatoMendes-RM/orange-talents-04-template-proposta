@@ -14,7 +14,6 @@ public class Proposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Email
     @NotBlank
     private String email;
@@ -37,25 +36,35 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-
     private String numerocartao;
+
+    @Enumerated(EnumType.STRING)
+    //@NotNull
+    private Andamento andamento;
 
     /*
     * @Deprecated  apenas para uso do hibernete.
     * */
     @Deprecated
-    private Proposta(@Email @NotBlank String email, @NotBlank String nome, @NotNull @Positive BigDecimal salario, @NotBlank String documento, Endereco novoEndereco, String numerocartao) { }
+    private Proposta(@Email @NotBlank String email
+            , @NotBlank String nome
+            , @NotNull @Positive BigDecimal salario
+            , @NotBlank String documento
+            , Endereco novoEndereco
+            , String numerocartao) { }
 
     public Proposta(String email,
                     String nome,
                     BigDecimal salario,
                     String documento,
-                    Endereco endereco) {
+                    Endereco endereco,
+                    Andamento andamento) {
         this.email = email;
         this.nome = nome;
         this.salario = salario;
         this.documento = documento;
         this.endereco = endereco;
+        this.andamento = andamento;
     }
 
     public Proposta() {
@@ -78,6 +87,26 @@ public class Proposta {
         return numerocartao;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Andamento getAndamento() {
+        return andamento;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -86,7 +115,7 @@ public class Proposta {
         this.numerocartao = numerocartao;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAndamento(Andamento andamento) {
+        this.andamento = andamento;
     }
 }

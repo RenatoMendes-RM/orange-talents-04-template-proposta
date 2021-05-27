@@ -18,10 +18,10 @@ public class AssociaCartaoPropostaForm {
         this.numerocartao = numerocartao;
     }
 
-
-    public static Proposta atualizar(Long id, String numerocartao, PropostaRepository propostaRepository) {
+    public static Proposta atualizar(Long id, String numerocartao, Andamento statusproposta, PropostaRepository propostaRepository) {
         Proposta proposta = propostaRepository.findById(id).get();
         proposta.setNumerocartao(numerocartao);
+        proposta.setAndamento(Andamento.CARTAO_GERADO);
         return proposta;
     }
 }
