@@ -7,14 +7,13 @@ services:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: proposal
       ports:
-        - 3307:3307
+        - 3307:3306
       volumes:
         - mysql-volume:/var/lib/mysql
     proposta:
       build:
         dockerfile: Dockerfile
         context: .
-      image: "rm21/proposta"
       restart: on-failure
       container_name: proposta
       ports:
@@ -24,7 +23,7 @@ services:
           - analise
           - contas
       environment:
-        DB_URL: jdbc:mysql://mysql:3307/proposal?createDatabaseIfNotExist=true&serverTimezone=UTC
+        DB_URL: jdbc:mysql://mysql:3306/proposal?createDatabaseIfNotExist=true&serverTimezone=UTC
         DB_USER: root
         DB_PASSWORD: root
         AVALIACAO_URL: http://analise:9999
