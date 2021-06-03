@@ -10,24 +10,26 @@ services:
         - 3307:3306
       volumes:
         - mysql-volume:/var/lib/mysql
-    proposta:
-      build:
-        dockerfile: Dockerfile
-        context: .
-      restart: on-failure
-      container_name: proposta
-      ports:
-          - "8080:8080"
-      depends_on:
-          - mysql
-          - analise
-          - contas
-      environment:
-        DB_URL: jdbc:mysql://mysql:3306/proposal?createDatabaseIfNotExist=true&serverTimezone=UTC
-        DB_USER: root
-        DB_PASSWORD: root
-        AVALIACAO_URL: http://analise:9999
-        CARTAO_URL: http://contas:8888
+#    proposta:
+#      build:
+#        dockerfile: Dockerfile
+#        context: .
+#      restart: on-failure
+#      container_name: proposta
+#      ports:
+#          - "8080:8080"
+#      depends_on:
+#          - mysql
+#          - analise
+#          - contas
+#      environment:
+#        DB_URL: jdbc:mysql://mysql:3306/proposal?createDatabaseIfNotExist=true&serverTimezone=UTC
+#        DB_USER: root
+#        DB_PASSWORD: root
+#        AVALIACAO_URL: http://analise:9999
+#        CARTAO_URL: http://contas:8888
+#        KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/nosso-cartao
+#        KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/nosso-cartao/protocol/openid-connect/certs
 
     zookeeper:
       image: "confluentinc/cp-zookeeper:5.2.1"
