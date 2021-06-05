@@ -1,9 +1,6 @@
 package br.com.ot4rmsproposta.propostaot4rms.novaProposta;
 
-import br.com.ot4rmsproposta.propostaot4rms.Cartao.Cartao;
-import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoRepository;
-import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoRequest;
-import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoResponse;
+import br.com.ot4rmsproposta.propostaot4rms.Cartao.*;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,7 +18,7 @@ import java.util.List;
 public class AssociaCartaoProposta {
 
     @Autowired
-    private AssociaCartaoPropostaClient associaCartaoPropostaClient;
+    private CartaoClientAPI cartaoClientAPI;
 
     @Autowired
     private PropostaRepository propostaRepository;
@@ -44,7 +41,7 @@ public class AssociaCartaoProposta {
     private boolean AssociaCartaoNaProposta(Long idProposta, String titular) {
         try {
             AssociaCartaoPropostaRequest associaCartaoPropostaRequest = new AssociaCartaoPropostaRequest(idProposta);
-            CartaoResponse cartaoResponse = associaCartaoPropostaClient.consulta(associaCartaoPropostaRequest);
+            CartaoResponse cartaoResponse = cartaoClientAPI.consulta(associaCartaoPropostaRequest);
                 String numerocartao = cartaoResponse.getId();
                 Proposta propostaComCartao = AssociaCartaoPropostaForm.atualizar(idProposta, numerocartao, Andamento.CARTAO_GERADO, propostaRepository);
 

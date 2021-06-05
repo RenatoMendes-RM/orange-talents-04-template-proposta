@@ -34,7 +34,7 @@ public class Proposta {
     private Endereco endereco;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private StatusProposta statusproposta;
 
     private String numerocartao;
 
@@ -99,16 +99,16 @@ public class Proposta {
         return endereco;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusProposta getStatusProposta() {
+        return statusproposta;
     }
 
     public Andamento getAndamento() {
         return andamento;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatusProposta(StatusProposta statusproposta) {
+        this.statusproposta = statusproposta;
     }
 
     public void setNumerocartao(String numerocartao) {

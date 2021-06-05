@@ -1,5 +1,6 @@
 package br.com.ot4rmsproposta.propostaot4rms.novaProposta;
 
+import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoClientAPI;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class PropostaController {
     private AnaliseSolicitacaoClient analiseClient;
 
     @Autowired
-    private AssociaCartaoPropostaClient associaCartaoPropostaClient;
+    private CartaoClientAPI cartaoClientAPI;
 
     // Task 015.consultando_dados_solicitante
     // Alternativa para tornar nossa API " um client" 1: usar:
@@ -45,12 +46,12 @@ public class PropostaController {
                     novaProposta.getId().toString());
 
             PropostaResponse resultadoDaConsulta = analiseClient.consultaPropostaElegivel(analiseRequest);
-            Status status = resultadoDaConsulta.status();
-            novaProposta.setStatus(status);
+            StatusProposta statusproposta = resultadoDaConsulta.getStatusProposta();
+            novaProposta.setStatusProposta(statusproposta);
         } catch (FeignException.UnprocessableEntity unprocessableEntity) {
-            novaProposta.setStatus(Status.NAO_ELEGIVEL);
+            novaProposta.setStatusProposta(StatusProposta.NAO_ELEGIVEL);
         }
-        Andamento andamento = (novaProposta.getStatus() == Status.NAO_ELEGIVEL) ?  Andamento.PROPOSTA_RECUSADA : Andamento.EM_ANALISE;
+        Andamento andamento = (novaProposta.getStatusProposta() == StatusProposta.NAO_ELEGIVEL) ?  Andamento.PROPOSTA_RECUSADA : Andamento.EM_ANALISE;
         novaProposta.setAndamento(andamento);
 
         propostaRepository.save(novaProposta);

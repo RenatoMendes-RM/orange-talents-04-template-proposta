@@ -1,10 +1,12 @@
 package br.com.ot4rmsproposta.propostaot4rms.Cartao;
 
+import br.com.ot4rmsproposta.propostaot4rms.Cartao.BloqueioCartao.BloqueioCartao;
 import br.com.ot4rmsproposta.propostaot4rms.novaProposta.Proposta;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
+@Table(name = "cartao")
 public class Cartao {
     @Id
     private String id;
@@ -23,6 +25,12 @@ public class Cartao {
     @JoinColumn(name = "idproposta")
     private Proposta proposta;
 
+    @Enumerated(value = EnumType.STRING)
+    private StatusCartao statuscartao = StatusCartao.ATIVO;
+
+    @OneToOne(cascade = CascadeType.MERGE) @JoinColumn(name = "bloqueiocartao")
+    private BloqueioCartao bloqueioCartao;
+
     public Cartao(){
 
     }
@@ -33,5 +41,18 @@ public class Cartao {
         this.titular = titular;
         this.limite = limite;
         this.proposta = proposta;
+    }
+
+    public boolean isBlocked() {
+       return this.statuscartao.equals(StatusCartao.BLOQUEADO);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setBloqueioCartao(BloqueioCartao bloqueioCartao) {
+        this.bloqueioCartao = bloqueioCartao;
+        this.statuscartao = StatusCartao.BLOQUEADO;
     }
 }

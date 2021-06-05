@@ -12,5 +12,5 @@ public class CartaoController {
     private PropostaRepository propostaRepository;
 
     @Autowired
-    private AssociaCartaoPropostaClient associaCartaoPropostaClient;
+    private CartaoClientAPI cartaoClientAPI;
 }

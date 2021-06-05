@@ -1,6 +1,6 @@
 package br.com.ot4rmsproposta.propostaot4rms.novaProposta;
 
-public enum Status {
+public enum StatusProposta {
     NAO_ELEGIVEL,
     ELEGIVEL
 }

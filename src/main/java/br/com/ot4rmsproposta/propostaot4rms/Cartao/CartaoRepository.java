@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 public interface CartaoRepository extends JpaRepository<Cartao, String> {
 
     boolean existsById(String idCartao);
-
-
 }

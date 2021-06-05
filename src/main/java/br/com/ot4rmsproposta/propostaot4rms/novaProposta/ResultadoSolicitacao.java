@@ -2,17 +2,16 @@ package br.com.ot4rmsproposta.propostaot4rms.novaProposta;
 
 public enum ResultadoSolicitacao {
 
+    COM_RESTRICAO(StatusProposta.NAO_ELEGIVEL),
+    SEM_RESTRICAO(StatusProposta.ELEGIVEL);
 
-    COM_RESTRICAO(Status.NAO_ELEGIVEL),
-    SEM_RESTRICAO(Status.ELEGIVEL);
+    private final StatusProposta statusProposta;
 
-    private final Status status;
-
-    ResultadoSolicitacao (Status status) {
-        this.status = status;
+    ResultadoSolicitacao (StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
     }
 }

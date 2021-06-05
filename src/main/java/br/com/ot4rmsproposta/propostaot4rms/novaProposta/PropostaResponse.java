@@ -17,7 +17,7 @@ public class PropostaResponse {
     public ResultadoSolicitacao getResultadoSolicitacao() {
         return resultadoSolicitacao;
     }
-    public Status status() {
-        return resultadoSolicitacao.getStatus();
+    public StatusProposta getStatusProposta() {
+        return resultadoSolicitacao.getStatusProposta();
     }
 }
