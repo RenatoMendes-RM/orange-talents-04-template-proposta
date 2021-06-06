@@ -19,4 +19,7 @@ public interface CartaoClientAPI {
     @GetMapping("/api/cartoes")
     CartaoResponse consulta(AssociaCartaoPropostaRequest request);
 
+    @PostMapping("/api/cartoes/{id}/bloqueios")
+    public void bloqueioCartao(@PathVariable String id, @RequestBody @Valid BloqueioCartaoRequest request);
+
 }

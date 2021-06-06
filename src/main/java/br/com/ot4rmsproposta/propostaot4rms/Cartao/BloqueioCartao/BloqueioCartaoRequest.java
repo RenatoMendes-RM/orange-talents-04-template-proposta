@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class BloqueioCartaoRequest {
     @NotBlank
-    private String sistemaResponsavel;
+    private String sistemaResponsavel = "propostas";
 
     public String getSistemaResponsavel() {
         return sistemaResponsavel;

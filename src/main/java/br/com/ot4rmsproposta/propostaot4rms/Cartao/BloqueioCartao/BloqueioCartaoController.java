@@ -3,10 +3,12 @@ package br.com.ot4rmsproposta.propostaot4rms.Cartao.BloqueioCartao;
 import br.com.ot4rmsproposta.propostaot4rms.Cartao.Cartao;
 import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoRepository;
 import br.com.ot4rmsproposta.propostaot4rms.Cartao.CartaoClientAPI;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +41,15 @@ public class BloqueioCartaoController {
                 , userAgent
                 , cartao.get());
         cartao.get().setBloqueioCartao(bloqueioCartao);
-        cartaoRepository.save(cartao.get());
-        return ResponseEntity.ok().build();
+
+        try {
+            BloqueioCartaoRequest bloqueioCartaoRequest = new BloqueioCartaoRequest();
+            cartaoClientAPI.bloqueioCartao(id, bloqueioCartaoRequest);
+            cartaoRepository.save(cartao.get());
+            return ResponseEntity.ok().build();
+        } catch (FeignException e) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"Não foi possível bloquear cartão!");
+        }
     }
+
 }
